@@ -14,10 +14,10 @@ public class TodoController : ControllerBase
     }
 
     [HttpGet("todo/list")]
-    public async Task<IActionResult> List() =>
-        Ok(await _mediator.Send(new ListTodoItemsRequest()));
+    public async Task<IActionResult> List(CancellationToken cancellationToken) =>
+        Ok(await _mediator.Send(new ListTodoItemsRequest(), cancellationToken));
     
     [HttpPost("todo/create")]
-    public async Task<IActionResult> Get([FromBody] CreateTodoItemRequest request) =>
-        Ok(await _mediator.Send(request));
+    public async Task<IActionResult> Get([FromBody] CreateTodoItemRequest request, CancellationToken cancellationToken) =>
+        Ok(await _mediator.Send(request, cancellationToken));
 }

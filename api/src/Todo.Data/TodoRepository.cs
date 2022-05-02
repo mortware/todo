@@ -12,17 +12,17 @@ public class TodoRepository: ITodoRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<TodoItem>> List()
+    public async Task<IEnumerable<TodoItem>> List(CancellationToken cancellationToken)
     {
         return await _context
             .TodoItems
-            .ToArrayAsync();
+            .ToArrayAsync(cancellationToken);
     }
 
-    public async Task<Guid> Create(TodoItem newItem)
+    public async Task<Guid> Create(TodoItem newItem, CancellationToken cancellationToken)
     {
-        await _context.TodoItems.AddAsync(newItem);
-        await _context.SaveChangesAsync();
+        await _context.TodoItems.AddAsync(newItem, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
         return newItem.Id;
     }
 }

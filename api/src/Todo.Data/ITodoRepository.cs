@@ -4,7 +4,7 @@ namespace Todo.Data;
 
 public interface ITodoRepository
 {
-    Task<IEnumerable<TodoItem>> List();
+    Task<IEnumerable<TodoItem>> List(CancellationToken cancellationToken);
     
-    Task<Guid> Create(TodoItem newItem);
+    Task<Guid> Create(TodoItem newItem, CancellationToken cancellationToken);
 }

@@ -20,6 +20,6 @@ public class CreateTodoItemHandler : IRequestHandler<CreateTodoItemRequest, Guid
             Text = request.Text
         };
 
-        return _todoRepository.Create(item);
+        return _todoRepository.Create(item, cancellationToken);
     }
 }
