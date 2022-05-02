@@ -11,8 +11,8 @@ public class ListTodoItemsHandler : IRequestHandler<ListTodoItemsRequest, IEnume
         _todoRepository = todoRepository;
     }
 
-    public async Task<IEnumerable<TodoItem>> Handle(ListTodoItemsRequest request, CancellationToken cancellationToken)
+    public Task<IEnumerable<TodoItem>> Handle(ListTodoItemsRequest request, CancellationToken cancellationToken)
     {
-        return await _todoRepository.List();
+        return _todoRepository.List();
     }
 }

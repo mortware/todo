@@ -11,7 +11,7 @@ public class CreateTodoItemHandler : IRequestHandler<CreateTodoItemRequest, Guid
         _todoRepository = todoRepository;
     }
 
-    public async Task<Guid> Handle(CreateTodoItemRequest request, CancellationToken cancellationToken)
+    public Task<Guid> Handle(CreateTodoItemRequest request, CancellationToken cancellationToken)
     {
         var item = new TodoItem
         {
@@ -20,7 +20,6 @@ public class CreateTodoItemHandler : IRequestHandler<CreateTodoItemRequest, Guid
             Text = request.Text
         };
 
-        var itemId = await _todoRepository.Create(item);
-        return itemId;
+        return _todoRepository.Create(item);
     }
 }
