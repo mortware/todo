@@ -33,4 +33,14 @@ export class TodoService {
       })
     );
   }
+
+  update(item:TodoItem):Observable<TodoItem>{
+    var r =  this.http.post<TodoItem>(TodoService.BasePath+"/update",item).pipe(
+      tap(_=>{
+        this.refreshList$.next(false);
+      })
+    )
+    return r;
+  }
+
 }

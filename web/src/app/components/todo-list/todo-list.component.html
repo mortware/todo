@@ -2,22 +2,32 @@
 
     <article>
         <form [formGroup]="form" (submit)="submit()">
-            <input type="text" placeholder="Create new item" formControlName="text">
-            <button type="submit"  [disabled]="form.invalid">Submit</button>    
+            <input type="text" placeholder="Create new item" formControlName="text" minlength="1" required>
+            <button type="submit"  [disabled]="form.invalid || this._submitting">Submit</button>    
+            <button type="button" (click)="this._showCompleted = !this._showCompleted" style="margin-left:0.5rem">
+                <span *ngIf="!this._showCompleted">Show Completed</span>
+                <span *ngIf="this._showCompleted">Hide Completed</span>
+                
+            </button>
         </form>
         
     </article>
-    <article *ngFor="let item of vm.items">
-        <div class="control">
-            <fa-icon [icon]="faCheck" *ngIf="item.completed"></fa-icon>
-        </div>
-        <div class="text" [class.completed]="item.completed">
-            {{ item.text }}
-        </div>
-        <div class="created">
-            {{ item.created | date:'EEE, dd MMM yyyy' }}
-        </div>
-    </article>
+
+    <div *ngFor="let item of vm.items">
+        <article *ngIf="this._showCompleted || !item.completed">
+                <div class="control" (click)="this.complete(item)">
+                    <fa-icon [icon]="faCheck" *ngIf="item.completed"></fa-icon>
+                    <fa-icon [icon]="farSquare" *ngIf="!item.completed"></fa-icon>
+                </div>
+                <div class="text" [class.completed]="item.completed">
+                    {{ item.text }}
+                </div>
+                <div class="created">
+                    {{ item.created | date:'EEE, dd MMM yyyy' }}
+                </div>
+        </article>
+    </div>
+   
 </div>
 
 <ng-template #status>
