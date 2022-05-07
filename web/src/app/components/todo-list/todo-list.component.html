@@ -3,7 +3,7 @@
     <article>
         <form [formGroup]="form" (submit)="submit()">
             <input type="text" placeholder="Create new item" formControlName="text">
-            <button type="submit"  [disabled]="form.invalid">Submit</button>    
+            <button type="submit"  [disabled]="form.invalid || this.busy">Submit</button>    
         </form>
         
     </article>

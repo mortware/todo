@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { BehaviorSubject, catchError, map, Observable, throwError, tap } from 'rxjs';
 import { TodoService } from 'src/app/core/services/todo.service';
 import { BaseComponent } from '../base.component';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,8 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 })
 export class TodoListComponent extends BaseComponent {
 
+  busySubject = new BehaviorSubject<boolean>(false);
+  busy: boolean = false;
   vm$: Observable<any>;
   form: FormGroup;
   faCheck = faCheck;
@@ -36,10 +38,26 @@ export class TodoListComponent extends BaseComponent {
         return throwError(() => err);
       })
     );
+
+    this.busySubject.pipe(
+      tap(_ => {
+        this.busy = _;
+      })
+    ).subscribe();
   }
 
   submit() {
+    this.busySubject.next(true);
     this.todoService.create(this.form.get('text')?.value)
-      .subscribe(() => this.form.reset());
+      .subscribe({
+        complete: () => {
+          this.busySubject.next(false);
+          this.form.reset();
+        },
+        error: err => {
+          this.handleError('Failed to create new item', err.message);
+          return throwError(() => err);
+        }
+      });
   }
 }
