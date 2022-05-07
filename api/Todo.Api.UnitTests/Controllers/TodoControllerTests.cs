@@ -19,7 +19,9 @@
             var type = typeof(TodoController);
 
             // Assert
-            type.GetCustomAttributes(false).Should().ContainSingle(x => x is ApiControllerAttribute);
+            var attributes = type.GetCustomAttributes(false);
+            attributes.Should().HaveCount(1);
+            attributes.Should().ContainSingle(x => x is ApiControllerAttribute);
             type.BaseType.Should().Be(typeof(ControllerBase));
         }
 
