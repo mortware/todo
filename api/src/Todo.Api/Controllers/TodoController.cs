@@ -7,12 +7,10 @@ namespace Todo.Api.Controllers;
 public class TodoController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly DbInitializer _dbInitialiser;
 
-    public TodoController(IMediator mediator, DbInitializer dbInitialiser)
+    public TodoController(IMediator mediator)
     {
         _mediator = mediator;
-        _dbInitialiser = dbInitialiser;
     }
 
     [HttpGet("todo/list")]
@@ -24,12 +22,4 @@ public class TodoController : ControllerBase
 
     [HttpPatch("todo/update")]
     public async Task<IActionResult> Update([FromBody] UpdateTodoItemRequest request, CancellationToken cancellationToken) => Ok(await _mediator.Send(request, cancellationToken));
-
-    [HttpGet("todo/reset")]
-    public ActionResult Reset()
-    {
-        this._dbInitialiser.Seed();
-
-        return this.NoContent();
-    }
 }
