@@ -9,7 +9,6 @@
     using FluentAssertions;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Todo.Api.Controllers;
     using Todo.Api.Requests;
@@ -17,18 +16,6 @@
 
     public class TodoControllerTests
     {
-        [Fact]
-        public void Ctor_ArgumentsPassed_AssignsToExpectedPrivateFields()
-        {
-            // Arrange
-            var mediator = new Mock<IMediator>();
-            var sut = new TodoController(mediator.Object);
-            var wrapper = new PrivateObject(sut);
-
-            // Assert
-            wrapper.GetField("_mediator").Should().Be(mediator.Object);
-        }
-
         [Fact]
         public void Controller_Type_ImplementsExpectedAttributesAndDerivedTypes()
         {
@@ -54,7 +41,7 @@
                 Created = new DateTime(2020, 01, 01),
                 Text = "go outside",
             };
-            var mediator = new Mock<IMediator>();
+            var mediator = new Mock<IMediator>(MockBehavior.Strict);
             mediator.Setup(x => x.Send(It.IsAny<UpdateTodoItemRequest>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(serviceResult);
             var sut = new TodoController(mediator.Object);
@@ -75,6 +62,7 @@
             responseModel.Id.Should().Be(default(Guid));
             responseModel.Completed.Should().Be(default(DateTime?));
             mediator.Verify(x => x.Send(request, CancellationToken.None), Times.Once());
+            mediator.VerifyNoOtherCalls();
         }
     }
 }
