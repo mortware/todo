@@ -16,10 +16,21 @@ html {
         align-items: center;
 
         .control {
-            width: 2em;
+            width: 3em;
 
             fa-icon {
-                color: green;
+                &.button-completed {
+                    color: green;
+                }
+
+                &.button-todo {
+                    color: red;
+                }
+            }
+
+            button {
+                padding: 0.5rem;
+                flex: 1;
             }
         }
 
@@ -35,9 +46,21 @@ html {
             }
         }
 
+        .completed-at {
+            font-size: 0.8rem;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
         .created {
             font-size: 0.8rem;
             color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .separator {
+            border-left: 1px solid rgba(0, 0, 0, 0.5);
+            height: 0.8rem;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
         }
     }
 
