@@ -51,7 +51,7 @@ app.MapControllers();
 await using (var scope = app.Services.CreateAsyncScope())
 {
     var dbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
-    dbInitializer.Seed(scope.ServiceProvider);
+    dbInitializer.Seed();
 }
 
 app.Run();
