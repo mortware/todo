@@ -1,13 +1,8 @@
 ﻿namespace Todo.Api.UnitTests.Handlers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Text;
     using System.Threading.Tasks;
     using FluentAssertions;
-    using FluentAssertions.Execution;
     using Moq;
     using Todo.Api.Handlers;
     using Todo.Api.Requests;
