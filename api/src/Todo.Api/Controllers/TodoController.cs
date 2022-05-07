@@ -22,6 +22,9 @@ public class TodoController : ControllerBase
     [HttpPost("todo/create")]
     public async Task<IActionResult> Create([FromBody] CreateTodoItemRequest request, CancellationToken cancellationToken) => Ok(await _mediator.Send(request, cancellationToken));
 
+    [HttpPatch("todo/update")]
+    public async Task<IActionResult> Update([FromBody] UpdateTodoItemRequest request, CancellationToken cancellationToken) => Ok(await _mediator.Send(request, cancellationToken));
+
     [HttpGet("todo/reset")]
     public ActionResult Reset()
     {
