@@ -38,6 +38,11 @@ export class TodoListComponent extends BaseComponent {
     );
   }
 
+  markComplete(item : any){
+    console.log(item);
+    this.todoService.update(item.id).subscribe();
+  }
+  
   submit() {
     this.todoService.create(this.form.get('text')?.value)
       .subscribe(() => this.form.reset());

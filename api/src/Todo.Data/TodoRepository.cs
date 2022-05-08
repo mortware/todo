@@ -15,7 +15,7 @@ public class TodoRepository: ITodoRepository
     public async Task<IEnumerable<TodoItem>> List()
     {
         return await _context
-            .TodoItems
+            .TodoItems.OrderByDescending(x => x.Created)
             .ToArrayAsync();
     }
 
