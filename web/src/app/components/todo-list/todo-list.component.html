@@ -1,13 +1,23 @@
 <div *ngIf="vm$ | async as vm;else status" class="todo-list">
 
     <article>
+        <div>
+            <input class="form-check-input" type="checkbox"  [checked]="toggle" id="chktodoItems"
+              (change)="toggle = !toggle" />
+            <label class="form-check-label" for="chktodoItems">
+              show completed items
+            </label>
+          </div> 
+    </article>
+
+    <article>
         <form [formGroup]="form" (submit)="submit()">
             <input type="text" placeholder="Create new item" formControlName="text">
             <button type="submit"  [disabled]="form.invalid">Submit</button>    
         </form>
         
     </article>
-    <article *ngFor="let item of vm.items" (click)="markComplete(item)">
+    <article *ngFor="let item of vm.items | orderBy:'created': 'DSC' | filter : toggle" (click)="markComplete(item)">
         <div class="control">
             <fa-icon [icon]="faCheck" *ngIf="item.completed"></fa-icon>
         </div>        
