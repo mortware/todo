@@ -25,4 +25,15 @@ public class TodoRepository: ITodoRepository
         await _context.SaveChangesAsync();
         return newItem.Id;
     }
+
+    public async Task<TodoItem> GetItem(Guid id)
+    {
+        return await _context.TodoItems.FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<bool> Update(TodoItem updatedItem)
+    {
+        _context.TodoItems.Attach(updatedItem);
+        return (await _context.SaveChangesAsync()) > 0;
+    }
 }
