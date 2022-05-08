@@ -12,7 +12,7 @@
             <fa-icon [icon]="faCheck" *ngIf="item.completed"></fa-icon>
         </div>
         <div class="text" [class.completed]="item.completed">
-            {{ item.text }}
+            {{ item.text | uppercase}}
         </div>
         <div class="created">
             {{ item.created | date:'EEE, dd MMM yyyy' }}
