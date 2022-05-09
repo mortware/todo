@@ -1,5 +1,4 @@
-﻿using Bogus;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Todo.Api.Requests;
 
 namespace Todo.Data;

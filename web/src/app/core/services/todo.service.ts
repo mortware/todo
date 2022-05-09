@@ -33,4 +33,13 @@ export class TodoService {
       })
     );
   }
+
+  setCompleted(id: string, dateTime: Date): Observable<TodoItem> {
+    /* There's probably a better way of doing this rather than updating the entire list every time! */
+    return this.http.patch<TodoItem>(`${TodoService.BasePath}/update`, { id: id, completed: dateTime }).pipe(
+        tap(_ => {
+          this.refreshList$.next(false);
+        })
+      );
+  }
 }

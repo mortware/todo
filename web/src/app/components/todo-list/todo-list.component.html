@@ -3,19 +3,26 @@
     <article>
         <form [formGroup]="form" (submit)="submit()">
             <input type="text" placeholder="Create new item" formControlName="text">
-            <button type="submit"  [disabled]="form.invalid">Submit</button>    
+            <button type="submit" [disabled]="form.invalid || this.formBusy">Submit</button>    
         </form>
         
     </article>
     <article *ngFor="let item of vm.items">
         <div class="control">
-            <fa-icon [icon]="faCheck" *ngIf="item.completed"></fa-icon>
+            <button (click)="this.setCompleted(item)">
+                <fa-icon [fixedWidth]="true" class="button-completed" [icon]="faCheck" *ngIf="item.completed"></fa-icon>
+                <fa-icon [fixedWidth]="true" class="button-todo" [icon]="faXmark" *ngIf="!item.completed"></fa-icon>
+            </button>
         </div>
         <div class="text" [class.completed]="item.completed">
             {{ item.text }}
         </div>
+        <div class="completed-at" *ngIf="item.completed">
+            <b>Completed:</b> {{ item.completed | date: 'EEE, dd, MMM, yyyy' }}
+        </div>
+        <div class="separator" *ngIf="item.completed"></div>
         <div class="created">
-            {{ item.created | date:'EEE, dd MMM yyyy' }}
+            <b>Created:</b> {{ item.created | date: 'EEE, dd MMM yyyy' }}
         </div>
     </article>
 </div>

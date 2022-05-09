@@ -1,7 +1,10 @@
 namespace Todo.Api.Requests;
 
+using System.ComponentModel.DataAnnotations;
+
 public class TodoItem
 {
+    [Required]
     public Guid Id { get; set; }
     
     public DateTime Created { get; set; }
