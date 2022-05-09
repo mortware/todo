@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, filter, map, Observable, throwError } from 'rxjs';
 import { TodoService } from 'src/app/core/services/todo.service';
 import { BaseComponent } from '../base.component';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-todo-list',
@@ -14,7 +15,8 @@ export class TodoListComponent extends BaseComponent {
 
   vm$: Observable<any>;
   form: FormGroup;
-  faCheck = faCheck;
+  faCheck = faCheck;  
+  toggle : boolean = false  
 
   constructor(
     private todoService: TodoService,
@@ -22,7 +24,7 @@ export class TodoListComponent extends BaseComponent {
     super();
 
     this.form = this.formBuilder.group({
-      text: new FormControl(null)
+      text: new FormControl(null, Validators.required)
     })
 
     this.vm$ = this.todoService.list$.pipe(
@@ -35,7 +37,12 @@ export class TodoListComponent extends BaseComponent {
         this.handleError('Failed to fetch items', err.message);
         return throwError(() => err);
       })
-    );
+    );    
+    
+  }
+  
+  markComplete(item : any){    
+    this.todoService.update(item.id).subscribe();
   }
 
   submit() {
