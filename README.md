@@ -1,70 +1,62 @@
 # Todo Exercise
 
+This exercise demonstrates a typical workflow/sprint for an existing API application. 
+
+Candidates will need the following:
+1. A [GitHub](https://github.com/) account
+2. An IDE such as [Visual Studio Code](https://code.visualstudio.com/download)
+
 This exercise provides candidates the opportunity to demonstrate a working knowledge of the following subjects:
-- Angular 2+ (currently 13)
-- ASP.NET WebApi (currently .NET 6)
-- Unit testing
 - Git
+- ASP.NET WebApi (.NET 7)
+- Unit testing
+
+> Note: Candidates are assessed on commit behaviour as much as the code changes.
 
 # Getting started
 
-## Get a copy of the code
-- Create a new repository at github.com
-  - Make it public
-  - Don't initialize it with a README, .gitignore, or license
-- Clone this repository to your local machine
-  - `git clone https://github.com/mortware/todo`
-  - Switch to the repo directory `cd todo`
-- Replace the origin with your own repository.
-  - `git remote rm origin`
-  - `git remote add origin https://github.com/[your-account]/[your-repo].git`
-- Push the local repository to your repository on github.
-  - `git push --set-upstream origin main`
+## Create a new repository
 
-When you have finished the exercise, please provide a link to the new repository.
+1. Create a new public repository at [github.com](https://github.com/)
+2. Clone the repository to your development machine
+   ```ps
+   git clone https://github.com/[your-account]/[your-repo]
+   ```
+3. Copy the exercise files into your new repository and commit them
+6. Complete the scenario tasks below
 
-### To run the back-end WebAPI
-`cd .\api\src\Todo.Api\`
-
-`dotnet run`
-
-### To run the front-end web application
-`cd .\web`
-
-`npm install`
-
-`ng serve`
+# Scenario
+A back-end API services a front-end application that allows users to create and manage Todo items. The front-end is managed by a different team, and is not part of this exercise. However, the tasks below will require you to make changes to the API to support new features and bug fixes.
 
 # Tasks
+The following user stories have been split into a typical workflow of Features, Bug-fixes and Technical tasks. 
+- They have been created off the back of a sprint planning session.
+- Most of the tasks are independent of each other.
+- They don't need to be completed in any particular order.
 
-### Bug fixes
-1. Bug fix: 'Prevent double submission'
-   > On slow connections, it's possible to multi-click the Submit button while a request is in progress. Please fix this by disabling the button when the request is in progress.
+1. Bug fix: 'Wrong times'
+   > Bug: Users in the UK are reporting that the `Created` field is off by one hour sometimes. Please investigate and fix.
 
-### New features
-1. Add new feature: 'Mark as completed'
-   > As a user, I want the ability to mark my todo items as completed.
-   1. Implement UI and API call to set an item as `completed`
-   2. The completed date must be displayed in the UI, if the item is visible
-2. Add new feature: 'Show completed items' 
-   > As a user, I don't want to see my completed items unless I have chosen to do so.
-   1. Implement UI and API call to show/hide completed items in the list view
-   2. Completed items should not be shown by default
+2. New feature: 'Mark as completed'
+   > As a user, I want the ability to mark my todo items as completed
 
-### Feature changes
-1. Disable submit button if there is no text in 'Create new item'
-1. Feature change: 'Item ordering'
+3. New feature: 'Show/hide completed items'
+   > As a user, I want the ability to show/hide Todo items that I have completed
+   
+4. New Feature: 'Form validation`
+   > As a user, I should not be able to create an empty Todo item
+   
+5. New Feature: 'Item sorting'
    > As a user, I want to see the most recently created items at the top
-2. Feature change: 'Make all items uppercase'
-   > As a user, I want my item text to automatically convert to uppercase after I've submitted it
+   
+6. New Feature: 'Make all items uppercase'
+   > As a user, I want my todo item text to automatically convert to uppercase _after_ I've submitted it
 
-### Technical tasks
-1. Add unit tests for new API logic
-2. Remove any redundant code
+7. Technical Story
+   > Add unit tests for _new_ API logic
 
-
-### Bonus tasks
-1. Add unit tests for angular components/services
+# Submitting your work
+When you have finished the exercise, please push your changes and provide a link to your new repository.
 
 # Further information
 
